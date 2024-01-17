@@ -34,7 +34,7 @@ export const websocketUtils = {
 }
 
 export async function createImage(prompt: string, id: string, headers: HeadersInit): Promise<string | undefined> {
-  const { headers: responseHeaders } = await fetch(`https://www.bing.com/images/create?partner=sydney&showselective=1&sude=1&kseed=8500&SFX=4&q=${encodeURIComponent(prompt)}&iframeid=${id}`,
+  const { headers: responseHeaders } = await fetch(`https://www.bing.com/images/create?partner=sydney&rt=3&showselective=1&sude=1&kseed=8500&SFX=4&q=${encodeURIComponent(prompt)}&iframeid=${id}`,
     {
       method: 'HEAD',
       headers: {
@@ -46,7 +46,7 @@ export async function createImage(prompt: string, id: string, headers: HeadersIn
     },
   );
 
-  if (!/&id=([^&]+)$/.test(responseHeaders.get('location') || '')) {
+  if (!/&id=([^&]+)/.test(responseHeaders.get('location') || '')) {
     throw new Error(`没有登录或登录已过期`)
   }
 
